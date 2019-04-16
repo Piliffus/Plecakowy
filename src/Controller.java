@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Controller
 {
     Input userInput;
@@ -15,6 +13,7 @@ public class Controller
     private void solveRodProblem()
     {
         makeRods();
+        makePlan();
     }
 
     private void makeRods()
@@ -26,5 +25,19 @@ public class Controller
         {
             rods[i] = new Rod(userInput.getNumber(), userInput.getNumberEndl());
         }
+    }
+
+    private void makePlan()
+    {
+        Plan plan = new Plan();
+        int size = userInput.getNumberEndl();
+        plan.setSize(size);
+
+        for (int i = 0; i < size-1; i++)
+        {
+            plan.setPiece(i, userInput.getNumber());
+        }
+
+        plan.setPiece(size-1, userInput.getNumberEndl());
     }
 }
