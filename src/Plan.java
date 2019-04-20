@@ -5,9 +5,10 @@ public class Plan
 
     private void setLengths()
     {
+        int[] lengthValues = Input.getNumber(size);
         for (int i = 0; i < size; i++)
         {
-            lengths[i] = new Length(Input.getNumber(Length.howManyFields()));
+            lengths[i] = new Length(lengthValues[i]);
         }
     }
 

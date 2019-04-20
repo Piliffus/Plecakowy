@@ -25,7 +25,7 @@ public class Controller
 
     private void preparePlan()
     {
-        Plan plan = new Plan(Input.getNumber());
+        plan = new Plan(Input.getNumber());
     }
 
     private void askForStrategy()

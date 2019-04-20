@@ -16,7 +16,6 @@ public class Input
         for (int i = 0; i < howMany; i++)
         {
             returning[i] = scanner.nextInt();
-            i++;
         }
 
         return returning;
