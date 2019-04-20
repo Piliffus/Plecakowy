@@ -1,43 +1,49 @@
 public class Controller
 {
-    Input userInput;
-    Output userOutput;
+    private PriceList priceList;
+    private Plan plan;
+    private Strategy strategy;
 
     public void start()
     {
-        Input userInput = new Input();
-        Output userOutput = new Output();
         solveRodProblem();
     }
 
     private void solveRodProblem()
     {
-        makeRods();
-        makePlan();
+        preparePriceList();
+        Test.priceListTest(priceList);
+        preparePlan();
+        Test.planTest(plan);
+        askForStrategy();
     }
 
-    private void makeRods()
+    private void preparePriceList()
     {
-        int howManyRods = userInput.getNumberEndl();
-        Rod[] rods = new Rod[howManyRods];
-
-        for (int i = 0; i < howManyRods; i++)
-        {
-            rods[i] = new Rod(userInput.getNumber(), userInput.getNumberEndl());
-        }
+        priceList = new PriceList(Input.getNumber());
     }
 
-    private void makePlan()
+    private void preparePlan()
     {
-        Plan plan = new Plan();
-        int size = userInput.getNumberEndl();
-        plan.setSize(size);
+        Plan plan = new Plan(Input.getNumber());
+    }
 
-        for (int i = 0; i < size-1; i++)
+    private void askForStrategy()
+    {
+        switch (Input.getString())
         {
-            plan.setPiece(i, userInput.getNumber());
+            case "minimalistyczna":
+                strategy = new Minimalist();
+                break;
+            case "ekologiczna":
+                strategy = new Ecologic();
+                break;
+            case "maksymalistyczna":
+                strategy = new Maximalist();
+                break;
+            case "ekonomiczna":
+                strategy = new Economic();
+                break;
         }
-
-        plan.setPiece(size-1, userInput.getNumberEndl());
     }
 }

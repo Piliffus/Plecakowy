@@ -1,14 +1,25 @@
 public class Plan
 {
-    int[] lengths;
+    private Length[] lengths;
+    private int size;
 
-    public void setSize(int arg)
+    private void setLengths()
     {
-        lengths = new int[arg];
+        for (int i = 0; i < size; i++)
+        {
+            lengths[i] = new Length(Input.getNumber(Length.howManyFields()));
+        }
     }
 
-    public void setPiece(int i, int arg)
+    public Length[] getLengths()
     {
-            lengths[i] = arg;
+        return lengths;
+    }
+
+    public Plan(int size)
+    {
+        this.size = size;
+        this.lengths = new Length[size];
+        setLengths();
     }
 }

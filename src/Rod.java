@@ -1,11 +1,35 @@
 public class Rod
 {
-    private int length; // milimeters
-    private int price; // PLN
+    private Length length; // millimeters
+    private Price price; // PLN
 
-    public Rod(int length, int price)
+    public static int howManyFields()
     {
-        this.length = length;
-        this.price = price;
+        return 2;
+    }
+
+    public Length getLength()
+    {
+        return length;
+    }
+
+    public Price getPrice()
+    {
+        return price;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Rod{" +
+                "length=" + length.value +
+                ", price=" + price.value +
+                '}';
+    }
+
+    public Rod(int[] argument)
+    {
+        this.length = new Length(argument[0]);
+        this.price = new Price(argument[1]);
     }
 }

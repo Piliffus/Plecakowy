@@ -2,18 +2,30 @@ import java.util.Scanner;
 
 public class Input
 {
-
-    public int getNumber()
+    public static int getNumber()
     {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
 
-    public int getNumberEndl()
+    public static int[] getNumber(int howMany)
     {
         Scanner scanner = new Scanner(System.in);
-        int temp = getNumber();
-        scanner.nextLine();
-        return temp;
+        int[] returning = new int[howMany];
+
+        for (int i = 0; i < howMany; i++)
+        {
+            returning[i] = scanner.nextInt();
+            i++;
+        }
+
+        return returning;
     }
+
+    public static String getString()
+    {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
 }
