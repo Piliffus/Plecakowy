@@ -1,3 +1,8 @@
 public class Ecologic extends Strategy
 {
+    @Override
+    public void solveProblem(Plan plan, PriceList priceList)
+    {
+
+    }
 }

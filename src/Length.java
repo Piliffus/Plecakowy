@@ -1,6 +1,12 @@
-public class Length
+public class Length implements Comparable<Length>
 {
-    int value;
+    private int value;
+
+    @Override
+    public int compareTo(Length other)
+    {
+        return this.getValue() - other.getValue();
+    }
 
     public static int howManyFields()
     {
@@ -13,6 +19,11 @@ public class Length
         return "Length{" +
                 "value=" + value +
                 '}';
+    }
+
+    public int getValue()
+    {
+        return value;
     }
 
     public Length(int[] value)

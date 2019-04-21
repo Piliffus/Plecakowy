@@ -1,7 +1,13 @@
-public class Rod
+public class Rod implements Comparable<Rod>
 {
     private Length length; // millimeters
     private Price price; // PLN
+
+    @Override
+    public int compareTo(Rod other) // Rods are compared by length
+    {
+        return this.length.getValue() - other.length.getValue();
+    }
 
     public static int howManyFields()
     {
@@ -22,8 +28,8 @@ public class Rod
     public String toString()
     {
         return "Rod{" +
-                "length=" + length.value +
-                ", price=" + price.value +
+                "length=" + length.getValue() +
+                ", price=" + price.getValue() +
                 '}';
     }
 

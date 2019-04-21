@@ -16,6 +16,9 @@ public class Controller
         preparePlan();
         Test.planTest(plan);
         askForStrategy();
+        strategy.solveProblem(plan, priceList);
+        Test.priceListTest(priceList);
+        Test.planTest(plan);
     }
 
     private void preparePriceList()

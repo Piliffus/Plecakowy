@@ -1,7 +1,14 @@
+import java.util.Arrays;
+
 public class PriceList
 {
     private int size;
     private Rod[] rods;
+
+    public void sortRodsByLength()
+    {
+        Arrays.sort(rods, 0, size);
+    }
 
     private void setRods()
     {
@@ -21,5 +28,21 @@ public class PriceList
     public Rod[] getRods()
     {
         return rods;
+    }
+
+    private void reverseRods()
+    {
+        for (int i = 0, j = size-1; i <= (size-1) / 2; i++, j--)
+        {
+            Rod helper = rods[i];
+            rods[i] = rods[j];
+            rods[j] = helper;
+        }
+    }
+
+    public void sortRodsByLengthReverseOrder()
+    {
+        sortRodsByLength();
+        reverseRods();
     }
 }
