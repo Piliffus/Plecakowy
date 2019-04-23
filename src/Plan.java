@@ -40,6 +40,16 @@ public class Plan
         return lengths;
     }
 
+    public Plan(Plan plan)
+    {
+        this.size = plan.getSize();
+        this.lengths = new Length[this.size];
+        for (int i = 0; i < plan.getSize(); i++)
+        {
+            this.lengths[i] = new Length(plan.getLengths()[i].getValue());
+        }
+    }
+
     public Plan(int size)
     {
         this.size = size;

@@ -1,15 +1,23 @@
-public class Ecologic extends Strategy
+import java.util.ArrayList;
+import java.util.Comparator;
+
+public class Ecologic extends ComplexStrategy implements Comparator<ComplexStrategy>
 {
     @Override
-    protected Rod findRod(PriceList priceList, Length howLong)
+    public int compare(ComplexStrategy arg1, ComplexStrategy arg2)
     {
-        return null;
+        return arg1.totalWastage - arg2.totalWastage;
     }
 
     @Override
-    protected void orderArrays(Plan plan, PriceList priceList)
+    protected void sortSolutions(ArrayList<ComplexStrategy> solutions)
     {
+        solutions.sort(this);
+    }
 
+    public Ecologic(int totalPrice, int totalWastage, ArrayList<ArrayList<Length>> usedRods, int howManyRods)
+    {
+        super(totalPrice, totalWastage, usedRods, howManyRods);
     }
 
     public Ecologic()

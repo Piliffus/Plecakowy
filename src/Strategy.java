@@ -9,14 +9,13 @@ public abstract class Strategy
 
     protected abstract void orderArrays(Plan plan, PriceList priceList);
 
-    protected void takeNewRod(PriceList priceList, IntReference remainder, IntReference howManyPieces, Length howLong)
+    protected void takeNewRod(PriceList priceList, IntReference remainder, Length howLong)
     {
         Rod rod = findRod(priceList, howLong);
         this.totalPrice += rod.getPrice().getValue();
         this.howManyRods++;
-        howManyPieces.setValue(1);
         usedRods.add(howManyRods-1, new ArrayList<>(1));
-        usedRods.get(howManyRods-1).add(howManyPieces.getValue()-1, rod.getLength());
+        usedRods.get(howManyRods-1).add(0, rod.getLength());
 
         remainder.setValue(rod.getLength().getValue());
     }
@@ -28,7 +27,6 @@ public abstract class Strategy
         orderArrays(plan, priceList);
 
         IntReference remainder = new IntReference(0);
-        IntReference howManyPieces = new IntReference(0);
 
         for (int i = 0; i < plan.getSize(); i++)
         {
@@ -36,13 +34,13 @@ public abstract class Strategy
             {
                 if (remainder.getValue() < plan.getLengths()[i].getValue())
                 {
-                    tryNext(remainder, howManyPieces, plan, i);
+                    tryNext(remainder, plan, i);
                     // we know that there is at least one piece not covered by tryNext
                     throwAway(remainder);
-                    takeNewRod(priceList, remainder, howManyPieces, plan.getLengths()[i]);
+                    takeNewRod(priceList, remainder, plan.getLengths()[i]);
                 }
 
-                cutOff(remainder, plan.getLengths()[i].getValue(), howManyPieces, plan.getLengths()[i]);
+                cutOff(remainder, plan.getLengths()[i].getValue(), plan.getLengths()[i]);
             }
         }
 
@@ -53,33 +51,32 @@ public abstract class Strategy
         Output.readUsedRods(usedRods);
     }
 
-    private void tryNext(IntReference remainder, IntReference howManyPieces, Plan plan, int i)
+    protected void tryNext(IntReference remainder, Plan plan, int i)
     {
         i++;
         if (i < plan.getSize())
         {
             if (remainder.getValue() >= plan.getLengths()[i].getValue())
             {
-                cutOff(remainder, plan.getLengths()[i].getValue(), howManyPieces, plan.getLengths()[i]);
-                tryNext(remainder, howManyPieces, plan, i);
+                cutOff(remainder, plan.getLengths()[i].getValue(), plan.getLengths()[i]);
+                tryNext(remainder, plan, i);
             }
             else
             {
-                tryNext(remainder, howManyPieces, plan, i);
+                tryNext(remainder, plan, i);
             }
         }
 
     }
 
-    private void cutOff(IntReference remainder, int howMuch, IntReference howManyPieces, Length length)
+    protected void cutOff(IntReference remainder, int howMuch, Length length)
     {
-        howManyPieces.setValue(howManyPieces.getValue()+1);
         remainder.setValue(remainder.getValue() - howMuch);
-        usedRods.get(this.howManyRods-1).add(howManyPieces.getValue() - 1, new Length(howMuch));
+        usedRods.get(this.howManyRods-1).add(new Length(howMuch));
         length.setValue(0);
     }
 
-    private void throwAway(IntReference remainder)
+    protected void throwAway(IntReference remainder)
     {
         this.totalWastage += remainder.getValue();
         remainder.setValue(0);

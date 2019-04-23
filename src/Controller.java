@@ -12,13 +12,9 @@ public class Controller
     private void solveRodProblem()
     {
         preparePriceList();
-        Test.priceListTest(priceList);
         preparePlan();
-        Test.planTest(plan);
         askForStrategy();
         strategy.solveProblem(plan, priceList);
-        Test.priceListTest(priceList);
-        Test.planTest(plan);
     }
 
     private void preparePriceList()
