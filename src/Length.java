@@ -26,6 +26,11 @@ public class Length implements Comparable<Length>
         return value;
     }
 
+    public void setValue(int value)
+    {
+        this.value = value;
+    }
+
     public Length(int[] value)
     {
         this.value = value[0];

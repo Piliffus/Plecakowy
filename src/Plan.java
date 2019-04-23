@@ -30,6 +30,11 @@ public class Plan
         }
     }
 
+    public int getSize()
+    {
+        return size;
+    }
+
     public Length[] getLengths()
     {
         return lengths;

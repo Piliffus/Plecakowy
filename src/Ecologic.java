@@ -1,8 +1,19 @@
 public class Ecologic extends Strategy
 {
     @Override
-    public void solveProblem(Plan plan, PriceList priceList)
+    protected Rod findRod(PriceList priceList, Length howLong)
+    {
+        return null;
+    }
+
+    @Override
+    protected void orderArrays(Plan plan, PriceList priceList)
     {
 
+    }
+
+    public Ecologic()
+    {
+        super();
     }
 }

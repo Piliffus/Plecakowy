@@ -18,13 +18,6 @@ public class PriceList
         }
     }
 
-    public PriceList(int size)
-    {
-        this.rods = new Rod[size];
-        this.size = size;
-        setRods();
-    }
-
     public Rod[] getRods()
     {
         return rods;
@@ -44,5 +37,17 @@ public class PriceList
     {
         sortRodsByLength();
         reverseRods();
+    }
+
+    public int getSize()
+    {
+        return size;
+    }
+
+    public PriceList(int size)
+    {
+        this.rods = new Rod[size];
+        this.size = size;
+        setRods();
     }
 }
