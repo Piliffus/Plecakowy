@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public abstract class ComplexStrategy extends Strategy
 {
@@ -25,10 +26,24 @@ public abstract class ComplexStrategy extends Strategy
         solveProblemRecursive(plan, priceList, new IntReference(0), 0,
                 new Length(0), new Price(0), solutions);
         sortSolutions(solutions);
+        sortRodPartition(solutions.get(0).usedRods);
 
         Output.printPrice(solutions.get(0).totalPrice);
         Output.printWastage(solutions.get(0).totalWastage);
         Output.printUsedRods(solutions.get(0).usedRods);
+    }
+
+    private void sortRodPartition(ArrayList<ArrayList<Length>> usedRods)
+    {
+        for (ArrayList<Length> Rod : usedRods)
+        {
+            /*
+             there is no slice bigger than the rod itself, so we can sort entire list, we sort because recursion puts
+             rods in reverse order, and we want ComplexStrategy output to be consistent with that of simple Strategy
+            */
+            Collections.sort(Rod);
+            Collections.reverse(Rod);
+        }
     }
 
     protected abstract void sortSolutions(ArrayList<ComplexStrategy> solutions);
