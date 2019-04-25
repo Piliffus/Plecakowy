@@ -15,6 +15,12 @@ public class Economic extends ComplexStrategy implements Comparator<ComplexStrat
         solutions.sort(this);
     }
 
+    @Override
+    protected ComplexStrategy makeNewSplit()
+    {
+        return new Economic(this.totalPrice, this.totalWastage, this.usedRods, this.howManyRods);
+    }
+
     public Economic(int totalPrice, int totalWastage, ArrayList<ArrayList<Length>> usedRods, int howManyRods)
     {
         super(totalPrice, totalWastage, usedRods, howManyRods);

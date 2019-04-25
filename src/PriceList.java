@@ -5,11 +5,6 @@ public class PriceList
     private int size;
     private Rod[] rods;
 
-    public void sortRodsByLength()
-    {
-        Arrays.sort(rods, 0, size);
-    }
-
     private void setRods()
     {
         for (int i = 0; i < size; i++)
@@ -18,9 +13,15 @@ public class PriceList
         }
     }
 
-    public Rod[] getRods()
+    public void sortRodsByLengthReverseOrder()
     {
-        return rods;
+        sortRodsByLength();
+        reverseRods();
+    }
+
+    public void sortRodsByLength()
+    {
+        Arrays.sort(rods, 0, size);
     }
 
     private void reverseRods()
@@ -33,10 +34,9 @@ public class PriceList
         }
     }
 
-    public void sortRodsByLengthReverseOrder()
+    public Rod[] getRods()
     {
-        sortRodsByLength();
-        reverseRods();
+        return rods;
     }
 
     public int getSize()

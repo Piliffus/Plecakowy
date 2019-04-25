@@ -7,21 +7,6 @@ public abstract class Strategy
     protected ArrayList<ArrayList<Length>> usedRods;
     protected int howManyRods;
 
-    protected abstract void orderArrays(Plan plan, PriceList priceList);
-
-    protected void takeNewRod(PriceList priceList, IntReference remainder, Length howLong)
-    {
-        Rod rod = findRod(priceList, howLong);
-        this.totalPrice += rod.getPrice().getValue();
-        this.howManyRods++;
-        usedRods.add(howManyRods-1, new ArrayList<>(1));
-        usedRods.get(howManyRods-1).add(0, rod.getLength());
-
-        remainder.setValue(rod.getLength().getValue());
-    }
-
-    protected abstract Rod findRod(PriceList priceList, Length howLong);
-
     public void solveProblem(Plan plan, PriceList priceList)
     {
         orderArrays(plan, priceList);
@@ -46,10 +31,12 @@ public abstract class Strategy
 
         throwAway(remainder);
 
-        Output.readPrice(totalPrice);
-        Output.readWastage(totalWastage);
-        Output.readUsedRods(usedRods);
+        Output.printPrice(totalPrice);
+        Output.printWastage(totalWastage);
+        Output.printUsedRods(usedRods);
     }
+
+    protected abstract void orderArrays(Plan plan, PriceList priceList);
 
     protected void tryNext(IntReference remainder, Plan plan, int i)
     {
@@ -68,6 +55,19 @@ public abstract class Strategy
         }
 
     }
+
+    private void takeNewRod(PriceList priceList, IntReference remainder, Length howLong)
+    {
+        Rod rod = findRod(priceList, howLong);
+        this.totalPrice += rod.getPrice().getValue();
+        this.howManyRods++;
+        usedRods.add(howManyRods-1, new ArrayList<>(1));
+        usedRods.get(howManyRods-1).add(0, rod.getLength());
+
+        remainder.setValue(rod.getLength().getValue());
+    }
+
+    protected abstract Rod findRod(PriceList priceList, Length howLong);
 
     protected void cutOff(IntReference remainder, int howMuch, Length length)
     {

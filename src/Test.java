@@ -4,7 +4,7 @@ public class Test
     {
         for (Rod rod : tested.getRods())
         {
-            Output.readRod(rod);
+            Output.printRod(rod);
         }
     }
 
@@ -12,7 +12,7 @@ public class Test
     {
         for (Length length : tested.getLengths())
         {
-            Output.readLength(length);
+            Output.printLength(length);
         }
     }
 }

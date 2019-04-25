@@ -22,13 +22,13 @@ public abstract class ComplexStrategy extends Strategy
     {
         ArrayList<ComplexStrategy> solutions = new ArrayList<>();
         this.howManyRods = -1;
-        solveProblemRecurrent(plan, priceList, new IntReference(0), 0,
+        solveProblemRecursive(plan, priceList, new IntReference(0), 0,
                 new Length(0), new Price(0), solutions);
         sortSolutions(solutions);
 
-        Output.readPrice(solutions.get(0).totalPrice);
-        Output.readWastage(solutions.get(0).totalWastage);
-        Output.readUsedRods(solutions.get(0).usedRods);
+        Output.printPrice(solutions.get(0).totalPrice);
+        Output.printWastage(solutions.get(0).totalWastage);
+        Output.printUsedRods(solutions.get(0).usedRods);
     }
 
     protected abstract void sortSolutions(ArrayList<ComplexStrategy> solutions);
@@ -39,15 +39,21 @@ public abstract class ComplexStrategy extends Strategy
         {
             if (rod.getLength().getValue() >= howLong.getValue())
             {
-                Economic newWay = new Economic(this.totalPrice, this.totalWastage, this.usedRods, this.howManyRods);
-                newWay.solveProblemRecurrent(new Plan(plan), priceList, new IntReference(rod.getLength().getValue()),
+                /*
+                 It doesnt matter that it`s Economic, Economic/Ecologic only make difference while sorting results,
+                 and we ensured we will have proper Comparator way back in Controller
+                */
+                ComplexStrategy newWay = makeNewSplit();
+                newWay.solveProblemRecursive(new Plan(plan), priceList, new IntReference(rod.getLength().getValue()),
                         i, rod.getLength(), rod.getPrice(), solutions);
             }
         }
     }
 
-    protected void solveProblemRecurrent(Plan plan, PriceList priceList, IntReference remainder, int i, Length rodLength,
-                                      Price whatWeBought, ArrayList<ComplexStrategy> solutions)
+    protected abstract ComplexStrategy makeNewSplit();
+
+    protected void solveProblemRecursive(Plan plan, PriceList priceList, IntReference remainder, int i, Length rodLength,
+                                         Price whatWeBought, ArrayList<ComplexStrategy> solutions)
     {
         this.howManyRods++;
         this.totalPrice += whatWeBought.getValue();

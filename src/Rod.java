@@ -9,6 +9,15 @@ public class Rod implements Comparable<Rod>
         return this.length.getValue() - other.length.getValue();
     }
 
+    @Override
+    public String toString()
+    {
+        return "Rod{" +
+                "length=" + length.getValue() +
+                ", price=" + price.getValue() +
+                '}';
+    }
+
     public static int howManyFields()
     {
         return 2;
@@ -22,15 +31,6 @@ public class Rod implements Comparable<Rod>
     public Price getPrice()
     {
         return price;
-    }
-
-    @Override
-    public String toString()
-    {
-        return "Rod{" +
-                "length=" + length.getValue() +
-                ", price=" + price.getValue() +
-                '}';
     }
 
     public Rod(int[] argument)

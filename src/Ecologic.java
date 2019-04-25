@@ -15,6 +15,12 @@ public class Ecologic extends ComplexStrategy implements Comparator<ComplexStrat
         solutions.sort(this);
     }
 
+    @Override
+    protected ComplexStrategy makeNewSplit()
+    {
+        return new Ecologic(this.totalPrice, this.totalWastage, this.usedRods, this.howManyRods);
+    }
+
     public Ecologic(int totalPrice, int totalWastage, ArrayList<ArrayList<Length>> usedRods, int howManyRods)
     {
         super(totalPrice, totalWastage, usedRods, howManyRods);
