@@ -54,10 +54,6 @@ public abstract class ComplexStrategy extends Strategy
         {
             if (rod.getLength().getValue() >= howLong.getValue())
             {
-                /*
-                 It doesnt matter that it`s Economic, Economic/Ecologic only make difference while sorting results,
-                 and we ensured we will have proper Comparator way back in Controller
-                */
                 ComplexStrategy newWay = makeNewSplit();
                 newWay.solveProblemRecursive(new Plan(plan), priceList, new IntReference(rod.getLength().getValue()),
                         i, rod.getLength(), rod.getPrice(), solutions);
